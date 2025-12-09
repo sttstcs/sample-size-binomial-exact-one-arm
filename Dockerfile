@@ -1,7 +1,8 @@
 FROM rocker/r-ver:4.3.2
 
-# plumber 依存ライブラリ
+# 必要な Linux ライブラリ（plumber + httpuv + stringi + rlang 依存すべて）
 RUN apt-get update && apt-get install -y \
+    zlib1g-dev \
     libsodium-dev \
     libssl-dev \
     libcurl4-openssl-dev \
@@ -11,10 +12,9 @@ RUN apt-get update && apt-get install -y \
     build-essential
 
 # R パッケージのインストール
-RUN R -e "install.packages(c('remotes'), repos='https://cloud.r-project.org')"
 RUN R -e "install.packages(c('plumber'), repos='https://cloud.r-project.org')"
 
-# デバッグ：plumber がインストールされているか確認
+# plumber が確実に入ったかチェック
 RUN R -e "library(plumber); sessionInfo()"
 
 WORKDIR /app
