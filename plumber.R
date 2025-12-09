@@ -112,3 +112,13 @@ function(p0, p1, alpha = 0.025, power = 0.80, nmin = 5, nmax = 300){
   
   return(res)
 }
+
+
+
+
+#* @get /
+#* @head /
+function(){
+  list(status = "ok", message = "API alive")
+}
+
